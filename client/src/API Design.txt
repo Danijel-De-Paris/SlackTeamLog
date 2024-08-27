@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Slack Team Access Logs API
+  version: 1.0.0
+  description: API for retrieving access logs of Slack team members.
+
+paths:
+  /api/slack/teams/accessLogsByUserId:
+    post:
+      summary: Upload a file to retrieve Slack access logs by user ID
+      operationId: getSlackTeamAccessLogsByUserId
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer token for authentication
+          schema:
+            type: string
+        - name: file
+          in: formData
+          required: true
+          description: Log file to upload
+          type: file
+        - name: maxPage
+          in: formData
+          required: false
+          description: Maximum number of pages to return
+          type: integer
+      responses:
+        '200':
+          description: Successful response with data and filename
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: The response data
+                  filename:
+                    type: string
+                    description: The name of the downloaded file
+        '401':
+          description: Unauthorized access
+
+  /api/slack/teams/accessLogs:
+    get:
+      summary: Retrieve Slack access logs
+      operationId: getSlackTeamAccessLogs
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer token for authentication
+          schema:
+            type: string
+        - name: maxPage
+          in: query
+          required: false
+          description: Maximum number of pages to return
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with data and filename
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: The response data
+                  filename:
+                    type: string
+                    description: The name of the downloaded file
+        '401':
+          description: Unauthorized access
