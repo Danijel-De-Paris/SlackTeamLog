@@ -53,7 +53,7 @@ export class SlackTeamController {
     );
     stream.pipe(response);
     stream.pipe(fileStream);
-    await this.slackTeamService.getAccessLogs(authHeader, 1, stream);
+    await this.slackTeamService.getAccessLogs(authHeader, maxPage, stream);
     // fileStream.close();
   }
 

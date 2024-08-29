@@ -17,7 +17,7 @@ export class SlackTeamService {
     maxPage: number,
     stream: Readable,
   ): Promise<Readable> {
-    const url = 'https://slack.com/api/team.accessLog';
+    const url = 'https://slack.com/api/team.accessLogs';
     const headers = {
       Authorization: authHeader,
       'Content-Type': 'application/json',
